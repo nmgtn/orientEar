@@ -45,6 +45,7 @@ $user_id = $validator->requiredNumericPostVar('user_id');
 
 $display_name = trim($validator->optionalPostVar('display_name'));
 $email = str_normalize($validator->optionalPostVar('email'));
+$user_classID = str_normalize($validator->optionalPostVar('user_classID'));
 $title = trim($validator->optionalPostVar('title'));
 
 $rm_groups = $validator->optionalPostVar('remove_groups');
@@ -81,7 +82,7 @@ if(!$user_id or !userIdExists($user_id)){
 	addAlert("danger", lang("ACCOUNT_INVALID_USER_ID"));
 	apiReturnError($ajax, getReferralPage());
 }
-	
+
 $userdetails = fetchUserAuthById($user_id); //Fetch user details
 
 $error_count = 0;
@@ -108,6 +109,15 @@ if ($email && $userdetails['email'] != $email){
 	}
 }
 
+//Update user class ID if specified and different from current value
+if ($user_classID && $userdetails['user_classID'] != $user_classID){
+    if (!updateUserClassID($user_id, $user_classID)){
+        $error_count++;
+    } else {
+        $success_count++;
+    }
+}
+
 //Update title if specified and different from current value
 if ($title && $userdetails['title'] != $title){
 	if (!updateUserTitle($user_id, $title)){
@@ -118,7 +128,7 @@ if ($title && $userdetails['title'] != $title){
 }
 
 // Update enabled if specified
-if ($enabled !== null){	
+if ($enabled !== null){
 	if (!updateUserEnabled($user_id, $enabled)){
 		$error_count++;
 	} else {
@@ -130,7 +140,7 @@ if ($enabled !== null){
 if ($password) {
 	// If updating own password, validate their current password
 	if ($self){
-		//Confirm the hashes match before updating a users password		
+		//Confirm the hashes match before updating a users password
 		if ($passwordcheck == ""){
 			addAlert("danger", lang("ACCOUNT_SPECIFY_PASSWORD"));
 			apiReturnError($ajax, getReferralPage());
@@ -138,22 +148,22 @@ if ($password) {
 			//No match
 			addAlert("danger", lang("ACCOUNT_PASSWORD_INVALID"));
 			apiReturnError($ajax, getReferralPage());
-		}	
+		}
 	}
-	
-	// Prevent updating if someone attempts to update with the same password	
+
+	// Prevent updating if someone attempts to update with the same password
 	if(passwordVerifyUF($password, $loggedInUser->hash_pw)) {
 		addAlert("danger", lang("ACCOUNT_PASSWORD_NOTHING_TO_UPDATE"));
 		apiReturnError($ajax, getReferralPage());
 	}
-	
+
 	if (!$password_hash = updateUserPassword($user_id, $password, $passwordc)){
 		$error_count++;
 	} else {
 		// If we're updating for the currently logged in user, update their hash_pw field
 		if ($self)
 			$loggedInUser->hash_pw = $password_hash;
-	
+
 		$success_count++;
 	}
 }
@@ -176,7 +186,7 @@ if(!empty($rm_groups)){
 if(!empty($add_groups)){
 	// Convert string of comma-separated group_id's into array
 	$group_ids_arr = explode(',',$add_groups);
-	
+
 	foreach ($group_ids_arr as $group_id){
 		if (addUserToGroup($user_id, $group_id)){
 			$success_count++;
