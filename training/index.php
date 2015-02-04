@@ -27,12 +27,8 @@ setReferralPage(getAbsoluteDocumentPath(__FILE__));
 <!doctype html>
 <html lang="en">
 <?php
-    echo renderAccountPageHeader(array("#SITE_ROOT#" => SITE_ROOT, "#SITE_TITLE#" => SITE_TITLE, "#PAGE_TITLE#" => "Admin Dashboard"));
+    echo renderAccountPageHeader(array("#SITE_ROOT#" => SITE_ROOT, "#SITE_TITLE#" => SITE_TITLE, "#PAGE_TITLE#" => "Training"));
 ?>
-
-<head>
-    <title>Training | orientEar</title>
-</head>
 
 <body>
     <div id="wrapper">
