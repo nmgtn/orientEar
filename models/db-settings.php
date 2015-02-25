@@ -30,10 +30,10 @@ THE SOFTWARE.
 */
 
 //Database Information
-$db_host = "localhost"; //Host address (most likely localhost)
-$db_name = "orientear"; //Name of Database
-$db_user = "orientear"; //Name of database user
-$db_pass = "concha"; //Password for database user
+$db_host = ""; //Host address (most likely localhost)
+$db_name = ""; //Name of Database
+$db_user = ""; //Name of database user
+$db_pass = ""; //Password for database user
 $db_table_prefix = "uf_";
 
 // All SQL queries use PDO now
