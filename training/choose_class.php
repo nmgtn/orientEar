@@ -34,7 +34,7 @@ setReferralPage(getAbsoluteDocumentPath(__FILE__));
      */
     echo renderAccountPageHeader(array("#SITE_ROOT#" => SITE_ROOT,
                                         "#SITE_TITLE#" => SITE_TITLE,
-                                        "#PAGE_TITLE#" => "Training"));
+                                        "#PAGE_TITLE#" => "Choose Class"));
 ?>
 
 <body>
@@ -42,12 +42,12 @@ setReferralPage(getAbsoluteDocumentPath(__FILE__));
 
         <!-- Sidebar -->
         <?php
-            echo renderMenu("training");
+            echo renderMenu("settings");
         ?>
 
         <div id="page-wrapper">
 
-            <h2>The Training Page</h2>
+            <h2>Choose Class</h2>
 
 
         </div><!-- /#page-wrapper -->
