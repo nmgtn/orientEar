@@ -49,6 +49,8 @@ setReferralPage(getAbsoluteDocumentPath(__FILE__));
 
             <h2>The Training Page</h2>
 
+            <?php include "EQtest.php" ?>
+
 
         </div><!-- /#page-wrapper -->
 
