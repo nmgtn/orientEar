@@ -45,3 +45,24 @@ function createGraphicEQ(EQArray, range, containerDivID, context) {
     return nodeArray;
 
 }
+
+
+
+// Create notes for a multi-band EQ, without creating controls
+// NB: required gain property in the EQArray as well as those required for createGraphicEQ();
+function createBlindEQ(EQArray, context) {
+
+    // Create array of nodes from spec in EQArray
+    var nodeArray = EQArray.map(function (band) {
+        var filterBand = context.createBiquadFilter();
+        filterBand.type = band.type;
+        filterBand.gain.value = band.gain;
+        filterBand.Q.value = band.Q;
+        filterBand.frequency.value = band.freq;
+        return filterBand;
+    });
+
+    // Return array of nodes
+    return nodeArray;
+
+}
