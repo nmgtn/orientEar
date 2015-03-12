@@ -55,12 +55,12 @@ setReferralPage(getAbsoluteDocumentPath(__FILE__));
       <!-- Sidebar -->
         <?php
           echo renderMenu("dashboard");
-        ?>  
+        ?>
 
       <div id="page-wrapper">
 	  	<div class="row">
           <div id='display-alerts' class="col-lg-12">
-          
+
           </div>
         </div>
         <div class="row">
@@ -69,15 +69,11 @@ setReferralPage(getAbsoluteDocumentPath(__FILE__));
             <ol class="breadcrumb">
               <li class="active"><i class="fa fa-dashboard"></i> Dashboard</li>
             </ol>
+
+            <!-- Welcome alert -->
             <div class="alert alert-success alert-dismissable">
               <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-              Welcome to UserFrosting!  The back end account management system is derived from <a class="alert-link" href="http://usercake.com">UserCake 2.0.2</a>, while the dashboard and admin account features are based on the SB Admin Template by <a class="alert-link" href="http://startbootstrap.com">Start Bootstrap</a>. Other key frameworks and plugins used in this system are:
-              <br><a class="alert-link" href='http://http://jquery.com/'>jQuery 1.10.2</a>
-              <br><a class="alert-link" href='http://getbootstrap.com/'>Twitter Bootstrap 3.0</a>
-              <br><a class="alert-link" href='http://fontawesome.io/'>Font Awesome</a>
-              <br><a class="alert-link" href='http://tablesorter.com/docs/'>Tablesorter 2.0</a>
-              <br>The <a class="alert-link" href='http://www.bootstrap-switch.org/'>Bootstrap Switch</a> component by Mattia Larentis,Peter Stein, and Emanuele Marchi
-              <br>All components are copyright of their respective creators.
+              Welcome to orientEar! This project is currently in development. You can find out more on <a class="alert-link" href="https://github.com/normington/Orientear/">GitHub</a>.
             </div>
           </div>
         </div><!-- /.row -->
@@ -93,35 +89,35 @@ setReferralPage(getAbsoluteDocumentPath(__FILE__));
                 <div class="list-group">
                   <a href="#" class="list-group-item">
                     <span class="badge">just now</span>
-                    <i class="fa fa-calendar"></i> Calendar updated
+                    <i class="fa fa-calendar"></i> New theory session scheduled
                   </a>
                   <a href="#" class="list-group-item">
                     <span class="badge">4 minutes ago</span>
-                    <i class="fa fa-comment"></i> Commented on a post
+                    <i class="fa fa-comment"></i> Received feedback from Jon Francombe
                   </a>
                   <a href="#" class="list-group-item">
                     <span class="badge">23 minutes ago</span>
-                    <i class="fa fa-truck"></i> Order 392 shipped
+                    <i class="fa fa-check"></i> Worked on exercise: edit fades
                   </a>
                   <a href="#" class="list-group-item">
                     <span class="badge">46 minutes ago</span>
-                    <i class="fa fa-money"></i> Invoice 653 has been paid
+                    <i class="fa fa-star"></i> Gained badge: 'Ears like a bat'
                   </a>
                   <a href="#" class="list-group-item">
                     <span class="badge">1 hour ago</span>
-                    <i class="fa fa-user"></i> A new user has been added
+                    <i class="fa fa-user"></i> Terry Wogan joined the class
                   </a>
                   <a href="#" class="list-group-item">
                     <span class="badge">2 hours ago</span>
-                    <i class="fa fa-check"></i> Completed task: "pick up dry cleaning"
+                    <i class="fa fa-level-up"></i> You made it to level 3!
                   </a>
                   <a href="#" class="list-group-item">
                     <span class="badge">yesterday</span>
-                    <i class="fa fa-globe"></i> Saved the world
+                    <i class="fa fa-check"></i> Completed assessment: First-year listening
                   </a>
                   <a href="#" class="list-group-item">
                     <span class="badge">two days ago</span>
-                    <i class="fa fa-check"></i> Completed task: "fix error on sales page"
+                    <i class="fa fa-check"></i> Worked on exercise: identify reverb
                   </a>
                 </div>
                 <div class="text-right">
@@ -130,6 +126,27 @@ setReferralPage(getAbsoluteDocumentPath(__FILE__));
               </div>
             </div>
           </div>
+
+          <div class="col-lg-4">
+              <div class="panel panel-primary">
+                  <div class="panel-heading">
+                      <h3 class="panel-title"><i class="fa fa-info-circle"></i> My Stats</h3>
+                  </div>
+                  <table class="table">
+                      <tr>
+                          <th scope="row">Score</th>
+                          <td>74%</td>
+                      </tr>
+                      <tr>
+                          <th scope="row">Class average</th>
+                          <td>67%</td>
+                      </tr>
+                      <tr>
+                          <th scope="row">Average attempts</th>
+                          <td>2.8</td>
+                      </tr>
+                  </table>
+
         </div><!-- /.row -->
 
       </div><!-- /#page-wrapper -->
@@ -137,11 +154,9 @@ setReferralPage(getAbsoluteDocumentPath(__FILE__));
     </div><!-- /#wrapper -->
 
 	<script>
-        $(document).ready(function() {       
+        $(document).ready(function() {
           alertWidget('display-alerts');
 		});
 	</script>
   </body>
 </html>
-
-

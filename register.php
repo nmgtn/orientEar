@@ -57,7 +57,7 @@ if(isUserLoggedIn()) {
 <html lang="en">
   <?php
 	echo renderTemplate("head.html", array("#SITE_ROOT#" => SITE_ROOT, "#SITE_TITLE#" => SITE_TITLE, "#PAGE_TITLE#" => "Register"));
-    
+
     $fields = [
         'user_name' => [
             'type' => 'text',
@@ -78,7 +78,7 @@ if(isUserLoggedIn()) {
                 'label' => 'Display name'
             ],
             'placeholder' => 'Please enter the display name'
-        ],          
+        ],
         'email' => [
             'type' => 'text',
             'label' => 'Email',
@@ -100,7 +100,7 @@ if(isUserLoggedIn()) {
                 'maxLength' => 50,
                 'label' => 'Password',
                 'passwordMatch' => 'passwordc'
-            ]        
+            ]
         ],
         'passwordc' => [
             'type' => 'password',
@@ -110,7 +110,7 @@ if(isUserLoggedIn()) {
                 'minLength' => 8,
                 'maxLength' => 50,
                 'label' => 'Password'
-            ]     
+            ]
         ],
         'captcha' => [
             'type' => 'text',
@@ -120,19 +120,19 @@ if(isUserLoggedIn()) {
                 'minLength' => 1,
                 'maxLength' => 50,
                 'label' => 'Security code'
-            ]                 
+            ]
         ]
     ];
-    
+
     $captcha = generateCaptcha();
-    
+
     $template = "
         <form name='newUser' class='form-horizontal' id='newUser' role='form' action='api/create_user.php' method='post'>
 		  <div class='row'>
 			<div id='display-alerts' class='col-lg-12'>
-		  
+
 			</div>
-		  </div>		
+		  </div>
 		  <div class='row'>
 			<div class='col-sm-12'>
                 {{user_name}}
@@ -147,7 +147,7 @@ if(isUserLoggedIn()) {
 			<div class='col-sm-12'>
                 {{email}}
             </div>
-		  </div>		  
+		  </div>
 		  <div class='row'>
             <div class='col-sm-12'>
                 {{password}}
@@ -177,11 +177,11 @@ if(isUserLoggedIn()) {
           <div class='collapse'>
             <label>Spiderbro: Don't change me bro, I'm tryin'a catch some flies!</label>
             <input name='spiderbro' id='spiderbro' value='http://'/>
-          </div>          
+          </div>
 		</form>";
-    
+
     $fb = new FormBuilder($template, $fields, [], [], true);
-    
+
   ?>
 
   <body>
@@ -189,14 +189,14 @@ if(isUserLoggedIn()) {
       <div class="header">
         <ul class="nav nav-pills navbar pull-right">
         </ul>
-        <h3 class="text-muted">UserFrosting</h3>
+        <h3 class="text-muted">orientEar</h3>
       </div>
       <div class="jumbotron">
         <h1>Let's get started!</h1>
         <p class="lead">Registration is fast and simple.</p>
         <?php echo $fb->render(); ?>
-        
-	  </div>	
+
+	  </div>
       <?php echo renderTemplate("footer.html"); ?>
 
     </div> <!-- /container -->
@@ -207,7 +207,7 @@ if(isUserLoggedIn()) {
 		$(".navbar").load("header-loggedout.php", function() {
             $(".navbar .navitem-register").addClass('active');
         });
-		
+
 		// Process submission
         $("form[name='newUser']").submit(function(e){
 			e.preventDefault();
@@ -217,18 +217,18 @@ if(isUserLoggedIn()) {
 				$('#display-alerts').html("");
 				$.each(errorMessages, function (idx, msg) {
 					$('#display-alerts').append("<div class='alert alert-danger'>" + msg + "</div>");
-				});	
+				});
 			} else {
-                // Process form                    
+                // Process form
                 // Serialize and post to the backend script in ajax mode
                 var serializedData = form.serialize();
-                serializedData += '&ajaxMode=true';     
+                serializedData += '&ajaxMode=true';
                 //console.log(serializedData);
-            
+
                 var url = APIPATH + "create_user.php";
-                $.ajax({  
-                  type: "POST",  
-                  url: url,  
+                $.ajax({
+                  type: "POST",
+                  url: url,
                   data: serializedData
                 }).done(function(result) {
                   var resultJSON = processJSONResult(result);
@@ -236,11 +236,11 @@ if(isUserLoggedIn()) {
                         console.log("error");
 						// Reload captcha
 						var img_src = APIPATH + 'generate_captcha.php?' + new Date().getTime();
-                        $.ajax({  
-                          type: "GET",  
-                          url: img_src,  
+                        $.ajax({
+                          type: "GET",
+                          url: img_src,
                           dataType: "text"
-                        }).done(function(result) { 
+                        }).done(function(result) {
                             $('#captcha').attr('src', result);
                             form.find('input[name="captcha"]' ).val("");
                             alertWidget('display-alerts');
@@ -249,7 +249,7 @@ if(isUserLoggedIn()) {
                   } else {
                     window.location.replace('login.php');
                   }
-                });   
+                });
             }
 		});
 	});

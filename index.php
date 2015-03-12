@@ -47,7 +47,7 @@ if(isUserLoggedIn()) {
 <!DOCTYPE html>
 <html lang="en">
   <?php
-	echo renderTemplate("head.html", array("#SITE_ROOT#" => SITE_ROOT, "#SITE_TITLE#" => SITE_TITLE, "#PAGE_TITLE#" => "Welcome to UserFrosting"));
+	echo renderTemplate("head.html", array("#SITE_ROOT#" => SITE_ROOT, "#SITE_TITLE#" => SITE_TITLE, "#PAGE_TITLE#" => "Welcome"));
   ?>
 
   <body>
@@ -55,11 +55,11 @@ if(isUserLoggedIn()) {
       <div class="header">
         <ul class="nav nav-pills navbar pull-right">
         </ul>
-        <h3 class="text-muted">UserFrosting</h3>
+        <h3 class="text-muted">orientEar</h3>
       </div>
       <div class="jumbotron">
-        <h1>Welcome to UserFrosting!</h1>
-        <p class="lead">A secure, modern user management system based on UserCake, jQuery, and Bootstrap.</p>
+        <h1>Welcome to orientEar!</h1>
+        <p class="lead">Experiments with the Web Audio API for Technical Ear Training</p>
 		<div class="row">
 			<div class="col-sm-12">
 			  <a href="login.php" class="btn btn-success" role="button" value='Login'>Login</a>
@@ -67,7 +67,7 @@ if(isUserLoggedIn()) {
         </div>
         <div class="jumbotron-links">
         </div>
-      </div>	
+      </div>
       <?php echo renderTemplate("footer.html"); ?>
 
     </div> <!-- /container -->
@@ -83,6 +83,6 @@ if(isUserLoggedIn()) {
             $(".navbar .navitem-home").addClass('active');
         });
         // Load jumbotron links
-        $(".jumbotron-links").load("jumbotron_links.php");     
+        $(".jumbotron-links").load("jumbotron_links.php");
 	});
 </script>
