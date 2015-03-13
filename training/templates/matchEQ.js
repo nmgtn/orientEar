@@ -28,16 +28,17 @@ var EQ = [
 ];
 var filterArray = createGraphicEQ(EQ, 40, 'graphic-EQ', context);
 
-// Pass filters to wavesurfer
-wavesurfer.backend.setFilters(filterArray);
+// Pass filters to wavesurfer (incl workaround for dual paths)
+connectNodesToWaveSurfer(filterArray, wavesurfer);
 
+// Toggle the transform on or off
 var transformActive = true;
 function toggleTransform() {
     if(transformActive) {
         wavesurfer.backend.setFilters();
         transformActive = false;
     } else {
-        wavesurfer.backend.setFilters(filterArray);
+        connectNodesToWaveSurfer(filterArray, wavesurfer);
         transformActive = true;
     }
 }
