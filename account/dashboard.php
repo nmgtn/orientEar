@@ -146,6 +146,19 @@ setReferralPage(getAbsoluteDocumentPath(__FILE__));
                           <td>2.8</td>
                       </tr>
                   </table>
+              </div>
+          </div>
+
+          <div class="col-lg-4">
+              <div class="panel panel-primary">
+                  <div class="panel-heading">
+                      <h3 class="panel-title"><i class="fa fa-line-chart"></i> My Progress</h3>
+                  </div>
+                  <div class="panel-body">
+                      <div id="morris-scoregraph-area"></div>
+                  </div>
+              </div>
+          </div>
 
         </div><!-- /.row -->
 
@@ -153,6 +166,9 @@ setReferralPage(getAbsoluteDocumentPath(__FILE__));
 
     </div><!-- /#wrapper -->
 
+    <script src="../js/raphael/2.1.0/raphael-min.js"></script>
+    <script src="../js/morris/morris-0.4.3.js"></script>
+    <script src="../js/morris/training-example-morris.js"></script>
 	<script>
         $(document).ready(function() {
           alertWidget('display-alerts');
