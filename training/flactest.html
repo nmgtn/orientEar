@@ -1,0 +1,26 @@
+<!doctype html>
+
+<html>
+
+    <head>
+        <title>FLAC test with wavesurfer</title>
+    </head>
+
+    <body>
+        <div id="waveform">
+            <!-- waveform goes here -->
+        </div>
+
+    </body>
+
+    <script src="js/wavesurfer.min.js"></script>
+    <script src="js/aurora.js"></script>
+
+    <script>
+    var wavesurfer = Object.create(WaveSurfer);
+    wavesurfer.init({
+        container: '#waveform'
+    });
+    </script>
+
+</html>
