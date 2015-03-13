@@ -2,7 +2,7 @@
 var context = new AudioContext();
 
 // Load WaveSurfer
-var wavesurfer = loadWaveSurfer('./test.wav', 'waveform', context);
+var wavesurfer = loadWaveSurfer('test.wav', 'waveform', context);
 
 // Do some filters
 var EQ = [

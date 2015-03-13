@@ -76,115 +76,7 @@ setReferralPage(getAbsoluteDocumentPath(__FILE__));
                 </div>
 
                 <div id="render-task" class="col-lg-8">
-                    <!-- Exercise appears here - make this panel appear when exercise selected
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title"><i class="fa fa-pencil-square-o"></i> Exercise</h3>
-                        </div>
-                        <div class="panel-body">
-                        </div>
-                    </div> -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    <!doctype html>
-
-                    <head>
-
-                        <!-- Dragdealer dependencies -->
-                        <script src="http://localhost/orientEar/training/js/dragdealer.min.js"></script>
-                        <link rel="stylesheet" href="http://localhost/orientEar/training/css/dragdealer.css" />
-
-                        <!-- Wavesurfer dependencies -->
-                        <script src="http://localhost/orientEar/training/js/wavesurfer.min.js"></script>
-                        <script src="http://localhost/orientEar/training/js/wavesurfer.regions.js"></script>
-
-                        <!-- js for this page -->
-                        <script src="http://localhost/orientEar/training/js/orientEar.renderTask.js"></script>
-                        <script src="http://localhost/orientEar/training/templates/matchEQ.js"></script>
-
-                    </head>
-
-                    <body>
-
-                        <!-- Panel within render-task div -->
-                        <div class="panel panel-default">
-
-                            <div class="panel-heading">
-                                <h3 class="panel-title"><i class="fa fa-pencil-square-o"></i> Match EQ</h3>
-                            </div>
-
-                            <div class="panel-body">
-
-                                <!-- Buttons -->
-                                <div class="row">
-                                    <div class="btn-group" role="group" aria-label="...">
-                                        <button type="button" class="btn btn-default" onclick="wavesurfer.playPause()">Play/Pause</button>
-                                        <button type="button" class="btn btn-default" onclick="toggleTransform()">Transform</button>
-                                        <button type="button" class="btn btn-warning" onclick="wavesurfer.clearRegions()">Clear Loop</button>
-                                    </div>
-                                </div>
-
-                                <!-- Waveform -->
-                                <div class="row">
-                                    <div id="waveform">
-                                        <!-- Waveform goes here -->
-                                    </div>
-                                </div>
-
-                                <!-- Graphic EQ -->
-                                <div class="row">
-                                    <div id="graphic-EQ">
-                                        <!-- Graphic EQ goes here -->
-                                    </div>
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </body>
-                    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                    <!-- Exercise appears here - make this panel appear when exercise selected -->
 
 
 
@@ -199,5 +91,19 @@ setReferralPage(getAbsoluteDocumentPath(__FILE__));
     </div><!-- /#wrapper -->
 
 </body>
+
+
+<!-- Dragdealer dependencies -->
+<script src="js/dragdealer.min.js"></script>
+<link rel="stylesheet" href="./css/dragdealer.css" />
+
+<!-- WaveSurfer dependencies -->
+<script src="js/wavesurfer.min.js"></script>
+<script src="js/wavesurfer.regions.js"></script>
+
+<!-- orientEar dependencies -->
+<script src="js/orientEar.renderTask.js"></script>
+
+
 
 </html>

@@ -1,24 +1,5 @@
-<!doctype html>
+<div id="render-task" class="col-lg-8">
 
-<head>
-
-    <!-- Dragdealer dependencies -->
-    <script src="http://localhost/orientEar/training/js/dragdealer.min.js"></script>
-    <link rel="stylesheet" href="http://localhost/orientEar/training/css/dragdealer.css" />
-
-    <!-- Wavesurfer dependencies -->
-    <script src="http://localhost/orientEar/training/js/wavesurfer.min.js"></script>
-    <script src="http://localhost/orientEar/training/js/wavesurfer.regions.js"></script>
-
-    <!-- js for this page -->
-    <script src="http://localhost/orientEar/training/js/orientEar.renderTask.js"></script>
-    <script src="http://localhost/orientEar/training/templates/matchEQ.js"></script>
-
-</head>
-
-<body>
-
-    <!-- Panel within render-task div -->
     <div class="panel panel-default">
 
         <div class="panel-heading">
@@ -27,31 +8,32 @@
 
         <div class="panel-body">
 
-            <!-- Buttons -->
             <div class="row">
                 <div class="btn-group" role="group" aria-label="...">
-                    <button type="button" class="btn btn-default" id="btn-playpause">Play/Pause</button>
-                    <button type="button" class="btn btn-default" id="btn-toggletransform">Transform</button>
-                    <button type="button" class="btn btn-warning" id="btn-clearloop">Clear Loop</button>
+                    <button type="button" class="btn btn-default" onclick="wavesurfer.playPause()">Play/Pause</button>
+                    <button type="button" class="btn btn-default" onclick="toggleTransform()">Transform</button>
+                    <button type="button" class="btn btn-warning" onclick="wavesurfer.clearRegions()">Clear Loop</button>
                 </div>
             </div>
 
-            <!-- Waveform -->
             <div class="row">
                 <div id="waveform">
                     <!-- Waveform goes here -->
                 </div>
             </div>
 
-            <!-- Graphic EQ -->
             <div class="row">
                 <div id="graphic-EQ">
                     <!-- Graphic EQ goes here -->
                 </div>
             </div>
 
-        </div>
+        </div><!-- /.panel-body -->
 
     </div>
 
-</body>
+</div><!-- /#render-task -->
+
+
+<!-- Task-specific dependencies -->
+<script src="matchEQ.js"></script>
