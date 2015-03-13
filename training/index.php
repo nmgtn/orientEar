@@ -67,7 +67,7 @@ setReferralPage(getAbsoluteDocumentPath(__FILE__));
                                 <a href="#" class="list-group-item">
                                     Identify EQ
                                 </a>
-                                <a href="#" class="list-group-item">
+                                <a href="#" onclick="$('#render-task').load('templates/matchEQ.html');" class="list-group-item">
                                     Match EQ
                                 </a>
                             </div>
@@ -77,15 +77,9 @@ setReferralPage(getAbsoluteDocumentPath(__FILE__));
 
                 <div id="render-task" class="col-lg-8">
                     <!-- Exercise appears here - make this panel appear when exercise selected -->
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title"><i class="fa fa-pencil-square-o"></i> Exercise</h3>
-                        </div>
-                        <div class="panel-body">
-                            <!-- Task appears here -->
-                            <?php include "EQtest.php" ?>
-                        </div>
-                    </div>
+
+
+
 
                 </div><!-- /#render-task -->
 
@@ -97,5 +91,19 @@ setReferralPage(getAbsoluteDocumentPath(__FILE__));
     </div><!-- /#wrapper -->
 
 </body>
+
+
+<!-- Dragdealer dependencies -->
+<script src="js/dragdealer.min.js"></script>
+<link rel="stylesheet" href="./css/dragdealer.css" />
+
+<!-- WaveSurfer dependencies -->
+<script src="js/wavesurfer.min.js"></script>
+<script src="js/wavesurfer.regions.js"></script>
+
+<!-- orientEar dependencies -->
+<script src="js/orientEar.renderTask.js"></script>
+
+
 
 </html>

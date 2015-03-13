@@ -1,3 +1,40 @@
+// Get WaveSurfer started to manage audio, generate waveform
+function loadWaveSurfer(audioFile, waveformDivID, context) {
+    // Instantiate and initialise
+    var wavesurfer = Object.create(WaveSurfer);
+    wavesurfer.init({
+        audioContext: context,
+        container: document.querySelector('#' + waveformDivID),
+        waveColor: '#BFBFBF',
+        progressColor: '#222222'
+    });
+
+    // Load audio file
+    wavesurfer.load(audioFile);
+
+    // Get regions going
+    wavesurfer.initRegions();
+    wavesurfer.enableDragSelection();
+
+    // Set loop up when region created
+    wavesurfer.on('region-created', setLoop);
+    var loopedRegion;
+    function setLoop(Region) {
+        // Remove existing region
+        if(loopedRegion) {
+            loopedRegion.remove();
+        }
+        // Start looping
+        Region.update({loop: true});
+        loopedRegion = Region;
+        looping = true;
+    }
+
+    // Return WaveSurfer object
+    return wavesurfer;
+
+}
+
 // Create sliders and nodes for a graphic EQ, return array of nodes
 function createGraphicEQ(EQArray, range, containerDivID, context) {
 
