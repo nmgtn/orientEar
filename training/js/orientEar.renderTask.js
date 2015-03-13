@@ -35,6 +35,22 @@ function loadWaveSurfer(audioFile, waveformDivID, context) {
 
 }
 
+
+
+// Connect array of audio nodes to wavesurfer, including workaround for the dual connection it normally does
+function connectNodesToWaveSurfer(nodeArray, wavesurfer) {
+    // Connect as normal
+    wavesurfer.backend.setFilters(nodeArray);
+    // Connection between analyser and gainNode is retained by WaveSurfer,
+    // effectively bypassing the FX loop.
+    // Disconnect the analyser to break the bypass
+    wavesurfer.backend.analyser.disconnect();
+    // Reconnect analyser to start of chain
+    wavesurfer.backend.analyser.connect(wavesurfer.backend.filters[0]);
+}
+
+
+
 // Create sliders and nodes for a graphic EQ, return array of nodes
 function createGraphicEQ(EQArray, range, containerDivID, context) {
 
@@ -43,8 +59,10 @@ function createGraphicEQ(EQArray, range, containerDivID, context) {
         var filterBand = context.createBiquadFilter();
         filterBand.type = band.type;
         filterBand.gain.value = 0;
-        filterBand.Q.value = band.Q;
         filterBand.frequency.value = band.freq;
+        if(band.Q) {
+            filterBand.Q.value = band.Q;
+        }
         return filterBand;
     });
 
