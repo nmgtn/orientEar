@@ -1,10 +1,14 @@
 // Get WaveSurfer started to manage audio, generate waveform
 function loadWaveSurfer(audioFile, waveformDivID, context) {
+
+    // Get waveform Div
+    var waveformDiv = document.querySelector('#' + waveformDivID);
+
     // Instantiate and initialise
     var wavesurfer = Object.create(WaveSurfer);
     wavesurfer.init({
         audioContext: context,
-        container: document.querySelector('#' + waveformDivID),
+        container: waveformDiv,
         waveColor: '#BFBFBF',
         progressColor: '#222222'
     });
@@ -29,6 +33,32 @@ function loadWaveSurfer(audioFile, waveformDivID, context) {
         loopedRegion = Region;
         looping = true;
     }
+
+    // Setup progress bar divs
+    var progressDiv = document.createElement('div');
+    progressDiv.className = 'progress progress-striped active';
+    var progressBarDiv = document.createElement('div');
+    progressBarDiv.className = 'progress-bar progress-bar-info';
+    progressDiv.appendChild(progressBarDiv);
+    waveformDiv.appendChild(progressDiv);
+
+    // Render the progress bar
+    (function () {
+
+        var showProgress = function (percent) {
+            progressDiv.style.display = 'block';
+            progressBarDiv.style.width = percent + '%';
+        };
+
+        var hideProgress = function () {
+            progressDiv.style.display = 'none';
+        };
+
+        wavesurfer.on('loading', showProgress);
+        wavesurfer.on('ready', hideProgress);
+        wavesurfer.on('destroy', hideProgress);
+        wavesurfer.on('error', hideProgress);
+    }());
 
     // Return WaveSurfer object
     return wavesurfer;
