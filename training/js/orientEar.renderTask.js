@@ -1,10 +1,14 @@
 // Get WaveSurfer started to manage audio, generate waveform
 function loadWaveSurfer(audioFile, waveformDivID, context) {
+
+    // Get waveform Div
+    var waveformDiv = document.querySelector('#' + waveformDivID);
+
     // Instantiate and initialise
     var wavesurfer = Object.create(WaveSurfer);
     wavesurfer.init({
         audioContext: context,
-        container: document.querySelector('#' + waveformDivID),
+        container: waveformDiv,
         waveColor: '#BFBFBF',
         progressColor: '#222222'
     });
@@ -30,10 +34,52 @@ function loadWaveSurfer(audioFile, waveformDivID, context) {
         looping = true;
     }
 
+    // Setup progress bar divs
+    var progressDiv = document.createElement('div');
+    progressDiv.className = 'progress progress-striped active';
+    var progressBarDiv = document.createElement('div');
+    progressBarDiv.className = 'progress-bar progress-bar-info';
+    progressDiv.appendChild(progressBarDiv);
+    waveformDiv.appendChild(progressDiv);
+
+    // Render the progress bar
+    (function () {
+
+        var showProgress = function (percent) {
+            progressDiv.style.display = 'block';
+            progressBarDiv.style.width = percent + '%';
+        };
+
+        var hideProgress = function () {
+            progressDiv.style.display = 'none';
+        };
+
+        wavesurfer.on('loading', showProgress);
+        wavesurfer.on('ready', hideProgress);
+        wavesurfer.on('destroy', hideProgress);
+        wavesurfer.on('error', hideProgress);
+    }());
+
     // Return WaveSurfer object
     return wavesurfer;
 
 }
+
+
+
+// Connect array of audio nodes to wavesurfer, including workaround for the dual connection it normally does
+function connectNodesToWaveSurfer(nodeArray, wavesurfer) {
+    // Connect as normal
+    wavesurfer.backend.setFilters(nodeArray);
+    // Connection between analyser and gainNode is retained by WaveSurfer,
+    // effectively bypassing the FX loop.
+    // Disconnect the analyser to break the bypass
+    wavesurfer.backend.analyser.disconnect();
+    // Reconnect analyser to start of chain
+    wavesurfer.backend.analyser.connect(wavesurfer.backend.filters[0]);
+}
+
+
 
 // Create sliders and nodes for a graphic EQ, return array of nodes
 function createGraphicEQ(EQArray, range, containerDivID, context) {
@@ -43,8 +89,10 @@ function createGraphicEQ(EQArray, range, containerDivID, context) {
         var filterBand = context.createBiquadFilter();
         filterBand.type = band.type;
         filterBand.gain.value = 0;
-        filterBand.Q.value = band.Q;
         filterBand.frequency.value = band.freq;
+        if(band.Q) {
+            filterBand.Q.value = band.Q;
+        }
         return filterBand;
     });
 
