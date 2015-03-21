@@ -17,10 +17,140 @@
     <script src="js/aurora.js"></script>
 
     <script>
+
+    // Instantiate/init wavesurfer
     var wavesurfer = Object.create(WaveSurfer);
     wavesurfer.init({
         container: '#waveform'
     });
+
+    // // Load a wav
+    // wavesurfer.load('test.wav');
+
+    // Create an Aurora asset
+    var auroraAsset = AV.Asset.fromURL('test.wav');
+
+
+
+    var audioContext = new AudioContext();
+    var theAudioBuffer = audioContext.createBuffer(2, 926100, 44100);
+    // console.log(theAudioBuffer);
+    //
+    auroraAsset.decodeToBuffer(function (buffer) {
+        console.log(theAudioBuffer);
+        floatsToAudioBuffer(buffer, theAudioBuffer);
+    });
+    // console.log(theAudioBuffer);
+
+
+
+    function floatsToAudioBuffer(floatArray, audioBuffer) {
+        // console.log('Made it! Sample rate is ' + audioBuffer.sampleRate);
+
+        // // Deinterleave
+        // var left = [];
+        // var right = [];
+        // for(var sample = 0; sample < floatArray.length; sample++) {
+        //     if(sample % 2) {
+        //         left.push(floatArray[sample]);
+        //     } else {
+        //         right.push(floatArray[sample]);
+        //     }
+        // }
+
+        deinterleave(floatArray, writeAudioBuffer);
+
+        function deinterleave(floatArray, callback) {
+            var left = new Float32Array();
+            var right = new Float32Array();
+
+            var frame = 0;
+            for(var sample = 0; sample < floatArray.length; sample++) {
+                if(sample % 2) {
+                    // left.push(floatArray[sample]);
+                    left[frame] = floatArray[sample];
+                } else {
+                    // right.push(floatArray[sample]);
+                    right[frame] = floatArray[sample];
+                }
+                frame++;
+            }
+            callback(audioBuffer, left, right);
+        }
+
+        function writeAudioBuffer(audioBuffer, leftChan, rightChan) {
+            audioBuffer.copyToChannel(leftChan, 0);
+            audioBuffer.copyToChannel(rightChan, 0);
+            console.log('Callback executed!');
+        }
+        //
+        // // Write to Audio Buffer
+        // audioContext.audioBuffer.copyToChannel(left, 0);
+        // audioContext.audioBuffer.copyToChannel(right, 0);
+    };
+
+    // Decode file to a float buffer
+    // var theFloatBuffer = new Array();
+
+
+    // auroraAsset.decodeToBuffer(function (buffer){
+    //     // console.log('Length of buffer passed to callback is ' + buffer.length);
+    //     // theFloatBuffer = buffer.slice(0);
+    //     // // theFloatBuffer = buffer;
+    //     // console.log('Length theFloatBuffer ' + theFloatBuffer.length);
+    //
+    //     // theFloatBuffer = buffer.slice(0);
+    //     // console.log('theFloatBuffer is length ' + theFloatBuffer.length);
+    //
+    //     var audioContext = new AudioContext();
+    //     var theAudioBuffer = audioContext.createBuffer(2, 926100, 44100);
+    //     var left = new Array();
+    //     var right = new Array();
+    //
+    //     for(var i = 0; i < buffer.length; i++) {
+    //         if((i%2) === 0) {
+    //             left.push(buffer[i]);
+    //         } else {
+    //             right.push(buffer[i]);
+    //         }
+    //     }
+    //
+    //     console.log('Left length is ' + left.length);
+    //     console.log('Right length is ' + right.length);
+    //
+    //     theAudioBuffer.copyToChannel(left, 0);
+    //     theAudioBuffer.copyToChannel(right, 1);
+    //
+    //
+    // });
+
+    // // Create audio context
+    // var audioContext = new AudioContext;
+    // // Create audiobuffer
+    // var theAudioBuffer = audioContext.createBuffer(2, 926100, 44100);
+    //
+    // // Deinterleave
+    // var left;
+    // var right;
+
+
+
+    // for(var i = 0; i < 1852200; i++) {
+    //     if((i%2) === 0) {
+    //         left.push(theFloatBuffer[i]);
+    //     } else {
+    //         right.push(theFloatBuffer[i]);
+    //     }
+    // }
+
+
+    //
+    // // Create an Aurora buffer
+    // var auroraBuffer = new AV.Buffer(theFloatBuffer);
+
+    // Make a Blob
+    // var theBlob = theBuffer.toBlob();
+
     </script>
 
 </html>
